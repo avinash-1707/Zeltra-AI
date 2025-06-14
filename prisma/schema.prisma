@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  name              String?
+  avatarUrl         String?
+  sessions          ChatSession[] @relation("UserSessions")
+  createdAt         DateTime      @default(now())
+  provider          String?
+  providerAccountId String?
+}
+
+model ChatSession {
+  id        String    @id @default(uuid())
+  title     String?
+  userId    String
+  user      User      @relation("UserSessions", fields: [userId], references: [id])
+  messages  Message[] @relation("SessionMessages")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id        String      @id @default(uuid())
+  content   String
+  role      Role
+  sessionId String
+  session   ChatSession @relation("SessionMessages", fields: [sessionId], references: [id])
+  createdAt DateTime    @default(now())
+}
+
+enum Role {
+  user
+  assistant
+}
