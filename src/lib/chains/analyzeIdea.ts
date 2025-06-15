@@ -4,7 +4,8 @@ import {
 } from "@langchain/core/prompts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ConversationChain } from "langchain/chains";
-import { BufferMemory } from "langchain/memory";
+import { BufferMemory, ChatMessageHistory } from "langchain/memory";
+import { prisma } from "../prisma";
 
 // Setting up Gemini
 const model = new ChatGoogleGenerativeAI({
@@ -22,7 +23,34 @@ const memory = new BufferMemory({
   memoryKey: "chat_context",
 });
 
-export async function analyzeIdeaChain(idea: string): Promise<string> {
+export async function analyzeIdeaChain(
+  idea: string,
+  sessionId: string
+): Promise<string> {
+  // Loading messages from db
+  const messagesFromDB = await prisma.message.findMany({
+    where: { sessionId },
+    orderBy: { createdAt: "asc" },
+  });
+
+  //storing messages in history
+  const messageHistory = new ChatMessageHistory();
+  for (const msg of messagesFromDB) {
+    if (msg.role === "human") {
+      await messageHistory.addUserMessage(msg.content);
+    }
+    if (msg.role === "ai") {
+      await messageHistory.addAIMessage(msg.content);
+    }
+  }
+
+  //setting up buffer memory
+  const memory = new BufferMemory({
+    chatHistory: messageHistory,
+    memoryKey: "chat_context",
+    returnMessages: true,
+  });
+
   const contexualizeQSystemPrompt = `You are an expert enterpreneur and a pro startup guy, the user have an idea which he want to create a startup on. You have to do the following things:
   > Try to figure out the niche of the idea and find out the necesarry features for some startup product in that niche.
    > Expand the idea that the user have just provided by your knowledge and by asking user specific questions to get the better idea of what the user wants to build.
@@ -42,5 +70,13 @@ export async function analyzeIdeaChain(idea: string): Promise<string> {
   });
 
   const response = await chain.call({ idea });
+
+  await prisma.message.createMany({
+    data: [
+      { sessionId, role: "human", content: idea },
+      { sessionId, role: "ai", content: response.response },
+    ],
+  });
+
   return response.response;
 }

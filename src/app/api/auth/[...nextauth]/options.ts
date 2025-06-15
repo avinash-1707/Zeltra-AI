@@ -21,9 +21,19 @@ export const authOptions: NextAuthOptions = {
       if (account && profile) {
         const email = profile.email;
         const name = profile.name;
-        const avatarUrl = profile.image;
+        // Handle different avatar URL properties for different providers
+        let avatarUrl: string | undefined;
+        if (account.provider === "google") {
+          avatarUrl = (profile as any).picture; // Google uses 'picture'
+        } else if (account.provider === "github") {
+          avatarUrl = (profile as any).avatar_url; // GitHub uses 'avatar_url'
+        }
         const provider = account.provider;
         const providerAccountId = account.providerAccountId;
+
+        if (!email) {
+          throw new Error("Oauth provider did not return an email");
+        }
 
         // 1. Try finding existing user by email
         let user = await prisma.user.findUnique({
