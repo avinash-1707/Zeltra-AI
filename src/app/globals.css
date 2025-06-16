@@ -41,7 +41,7 @@
   --sidebar-ring: oklch(0.708 0 0)}
 
 body {
-  font-family: var(--font-orbitron),var(--font-share-tech-mono),sans-serif;
+  font-family: var(--font-share-tech-mono),var(--font-orbitron),sans-serif;
 }
 
 @theme inline {
