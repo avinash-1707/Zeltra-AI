@@ -6,9 +6,10 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { motion } from "motion/react";
-import { Menu } from "lucide-react";
+import { Menu, PanelRightOpen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import NewChatModal from "./NewChatModal";
 
 const sidebarVariants = {
   closed: {
@@ -63,11 +64,12 @@ export default function SideBar() {
     []
   );
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const handleNewChat = async () => {
+  const handleNewChat = async (title: string) => {
     try {
-      const res = await axios.post("/api/new-chat");
+      const res = await axios.post("/api/new-chat", { title });
       const { sessionId } = res.data;
       router.push(`/chat/${sessionId}`);
     } catch (err) {
@@ -98,12 +100,6 @@ export default function SideBar() {
         initial={false}
         animate={isCollapsed ? "closed" : "open"}
         variants={sidebarVariants}
-        // initial={{
-        //   width: "4.5rem",
-        // }}
-        // animate={{
-        //   width: isCollapsed ? "4.5rem" : "16rem",
-        // }}
         transition={{
           duration: 0.3,
           ease: "easeInOut",
@@ -119,7 +115,7 @@ export default function SideBar() {
             onClick={toggleSidebar}
             className="p-2 hover:bg-gray-800 rounded text-white"
           >
-            <Menu size={24} />
+            {isCollapsed ? <Menu size={24} /> : <PanelRightOpen size={24} />}
           </button>
         </div>
         <motion.div
@@ -128,12 +124,17 @@ export default function SideBar() {
         >
           {!isCollapsed && (
             <button
-              onClick={handleNewChat}
+              onClick={() => setIsModalOpen(true)}
               className="w-3/4 px-3 py-2 text-white bg-blue-950 hover:bg-blue-800 rounded-3xl text-center"
             >
               + New Chat
             </button>
           )}
+          <NewChatModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onCreate={handleNewChat}
+          />
         </motion.div>
         <motion.nav
           variants={parentVariants}

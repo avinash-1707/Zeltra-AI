@@ -6,6 +6,7 @@ import { User } from "next-auth";
 import MessageBox from "./MessageBox";
 import MessageContainer from "./MessageContainer";
 import { v4 } from "uuid";
+import { motion } from "motion/react";
 interface Message {
   role: "human" | "ai";
   content: string;
@@ -17,6 +18,8 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   const user = session?.user as User | undefined;
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const hasMounted = useRef(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,11 +40,16 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       }));
 
       setMessages(parsed);
+      setHasLoaded(true);
     };
     fetchMessages();
   }, [sessionId]);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return; // Skip scroll on initial load
+    }
     scrollToBottom();
   }, [messages]);
 
@@ -76,18 +84,34 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div className="flex-1 p-4 space-y-4 overflow-y-auto mb-20">
-        {messages.map((msg) => (
-          <MessageContainer
-            key={v4()}
-            role={msg.role}
-            name={user?.name ?? "Anonymous"}
-            avatarUrl={
-              user?.avatarUrl ??
-              "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futurepedia.io%2Fai-tools%2Favatar-generator&psig=AOvVaw3ncGsSnztS05jmOKhOfIaI&ust=1750114924940000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjq_6XE9I0DFQAAAAAdAAAAABAE"
-            }
-            content={msg.content}
-          />
-        ))}
+        {hasLoaded && messages.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-1 flex-col h-screen items-center justify-center"
+          >
+            <div className="text-center bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent text-5xl">
+              Hi{user?.name ? `, ${user.name}` : ""}!
+            </div>
+            <div className="text-center text-white/70 text-2xl">
+              What are you thinking about building today?
+            </div>
+          </motion.div>
+        ) : (
+          messages.map((msg) => (
+            <MessageContainer
+              key={v4()}
+              role={msg.role}
+              name={user?.name ?? "Anonymous"}
+              avatarUrl={
+                user?.avatarUrl ??
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futurepedia.io%2Fai-tools%2Favatar-generator&psig=AOvVaw3ncGsSnztS05jmOKhOfIaI&ust=1750114924940000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjq_6XE9I0DFQAAAAAdAAAAABAE"
+              }
+              content={msg.content}
+            />
+          ))
+        )}
         {loading && (
           <MessageContainer
             role="ai"
@@ -96,12 +120,12 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
             content="Typing..."
           />
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="flex justify-center w-full">
         <MessageBox onSend={handleSend} />
       </div>
-      <div ref={messagesEndRef} />
     </div>
   );
 }
