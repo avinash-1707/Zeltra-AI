@@ -38,8 +38,8 @@ export default function MessageContainer({
           max-w-[60%] px-4 py-2 rounded-2xl
           ${
             role === "human"
-              ? "bg-blue-600 text-white rounded-br-none"
-              : "bg-gray-800 text-white rounded-bl-none"
+              ? "bg-blue-900 text-white rounded-bl-none"
+              : "bg-gray-800 text-white rounded-br-none"
           }
         `}
       >

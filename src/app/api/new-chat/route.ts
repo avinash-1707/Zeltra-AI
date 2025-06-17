@@ -14,6 +14,7 @@ export async function POST() {
     // Create new chat session for the user
     const newChat = await prisma.chatSession.create({
       data: {
+        title: "New Coversation",
         userId: session.user.id,
       },
     });

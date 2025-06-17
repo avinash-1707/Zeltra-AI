@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
@@ -18,6 +18,12 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   // Load messages from DB on mount
   useEffect(() => {
     const fetchMessages = async () => {
@@ -34,6 +40,10 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     };
     fetchMessages();
   }, [sessionId]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSend = async (userInput: string) => {
     if (!userInput.trim()) return;
@@ -65,7 +75,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   };
   return (
     <div className="flex flex-col min-h-screen justify-between">
-      <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+      <div className="flex-1 p-4 space-y-4 overflow-y-auto mb-20">
         {messages.map((msg) => (
           <MessageContainer
             key={v4()}
@@ -88,7 +98,10 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
         )}
       </div>
 
-      <MessageBox onSend={handleSend} />
+      <div className="flex justify-center w-full">
+        <MessageBox onSend={handleSend} />
+      </div>
+      <div ref={messagesEndRef} />
     </div>
   );
 }

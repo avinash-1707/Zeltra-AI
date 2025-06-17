@@ -23,10 +23,10 @@ export default function MessageBox({ onSend }: ChatInputProps) {
   };
 
   return (
-    <div className="w-3/5 h-20 fixed bottom-2 flex items-center justify-evenly bg-gray-800 rounded-xl">
+    <div className="w-1/2 h-20 fixed bottom-2 flex items-center justify-center bg-gray-900 rounded-xl">
       <Textarea
         placeholder="Analyze your startup idea"
-        className="flex-1 m-2 h-4/5 border-none bg-gray-600 text-white"
+        className="flex-1 m-2 h-4/5 border-none bg-gray-700 text-white"
         onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {
@@ -37,7 +37,7 @@ export default function MessageBox({ onSend }: ChatInputProps) {
         value={message}
       />
       <Button
-        className="mt-6 mr-1.5 border-2 border-black bg-white text-black"
+        className="mt-6 m-0.5 mr-2.5 border-2 border-black bg-white text-black"
         onClick={handleSend}
       >
         <Send />
