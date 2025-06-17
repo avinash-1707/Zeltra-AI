@@ -1,19 +1,48 @@
-import LoginTrigger from "@/components/LoginTrigger";
+"use client";
+import { CallToAction } from "@/components/landing-page/CallToAction";
+import FloatingElements from "@/components/landing-page/FloatingElements";
+import { Footer } from "@/components/landing-page/Footer";
+import { HeroSection } from "@/components/landing-page/HeroSection";
+import { HowItWorks } from "@/components/landing-page/HowItWorks";
+import { LandingNavbar } from "@/components/landing-page/Navbar";
+import { Testimonials } from "@/components/landing-page/Testimonials";
+import { WhyUseZeltra } from "@/components/landing-page/WhyUseZeltra";
+import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
+import { motion } from "motion/react";
+import { useParams } from "next/navigation";
 import React from "react";
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams: { loginRequired?: string };
 }) {
-  const resolvedParams = await searchParams;
+  const resolvedParams = useParams();
   const loginRequired = resolvedParams.loginRequired === "true";
   return (
-    <>
-      <h1 className="text-7xl flex justify-center items-center h-screen w-screen">
-        Hello world
-      </h1>
-      <LoginTrigger forceOpen={loginRequired} />
-    </>
+    <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-black/95 relative overflow-hidden">
+      <FloatingElements />
+
+      <LandingNavbar />
+
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* How It Works */}
+      <HowItWorks />
+
+      {/* Why Use Zeltra */}
+      <WhyUseZeltra />
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Call to Action */}
+      <CallToAction />
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
