@@ -28,6 +28,12 @@ export default function MessageBox({ onSend }: ChatInputProps) {
         placeholder="Analyze your startup idea"
         className="flex-1 m-2 h-4/5 border-none bg-gray-600 text-white"
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault(); // Prevent newline
+            handleSend(); // Send the message
+          }
+        }}
         value={message}
       />
       <Button

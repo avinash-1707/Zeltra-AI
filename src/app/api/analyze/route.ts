@@ -5,9 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, sessionId, message } = AnalyzeSchema.parse(
-      await req.json()
-    );
+    const { sessionId, message } = AnalyzeSchema.parse(await req.json());
 
     if (!message) {
       return NextResponse.json(

@@ -17,12 +17,6 @@ const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-// Buffer memory for temporary storage
-const memory = new BufferMemory({
-  returnMessages: true,
-  memoryKey: "chat_context",
-});
-
 export async function analyzeIdeaChain(
   idea: string,
   sessionId: string
@@ -55,7 +49,8 @@ export async function analyzeIdeaChain(
   > Try to figure out the niche of the idea and find out the necesarry features for some startup product in that niche.
    > Expand the idea that the user have just provided by your knowledge and by asking user specific questions to get the better idea of what the user wants to build.
     > The user will just give you a basic idea, you have to ask follow up questions to user to get what the user wants to build.
-     > If the user is not sure, you have to expand the idea yourself by your knowledge.`;
+     > If the user is not sure, you have to expand the idea yourself by your knowledge.
+      >Respond using GitHub-flavored Markdown syntax: use **bold**, *italic*, \n for line breaks, - for bullet points,and format clearly with spacing and structure. Avoid using HTML tags.`;
 
   const contexualizeQPrompt = ChatPromptTemplate.fromMessages([
     ["system", contexualizeQSystemPrompt],
@@ -71,12 +66,14 @@ export async function analyzeIdeaChain(
 
   const response = await chain.call({ idea });
 
-  await prisma.message.createMany({
+  const saveToDb = await prisma.message.createMany({
     data: [
       { sessionId, role: "human", content: idea },
       { sessionId, role: "ai", content: response.response },
     ],
   });
 
-  return response.response;
+  console.log(response.response);
+  if (saveToDb) return response.response;
+  return "There is an error in saving message to Db";
 }

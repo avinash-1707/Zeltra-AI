@@ -1,5 +1,8 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 interface MessageContainerProps {
-  role: string;
+  role: "human" | "ai";
   content: string;
   avatarUrl: string;
   name: string;
@@ -35,18 +38,18 @@ export default function MessageContainer({
           max-w-[60%] px-4 py-2 rounded-2xl
           ${
             role === "human"
-              ? "bg-gray-200 text-gray-900 rounded-bl-none"
-              : "bg-blue-600 text-white rounded-br-none"
+              ? "bg-blue-600 text-white rounded-br-none"
+              : "bg-gray-800 text-white rounded-bl-none"
           }
         `}
       >
-        {content}
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
       </div>
       {/* AI avatar shown on right */}
       {role === "ai" && (
         <div className="flex-shrink-0">
           <img
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futurepedia.io%2Fai-tools%2Favatar-generator&psig=AOvVaw3ncGsSnztS05jmOKhOfIaI&ust=1750114924940000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjq_6XE9I0DFQAAAAAdAAAAABAE"
+            src="/ai-avatar.jpg"
             alt="AI Avatar"
             className="w-10 h-10 rounded-full object-cover"
           />
