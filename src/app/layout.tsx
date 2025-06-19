@@ -16,7 +16,7 @@ const shareTechMono = Share_Tech_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thinksy AI",
+  title: "Zeltra AI",
   description: "An AI tool to get you the prompt for your idea.",
 };
 

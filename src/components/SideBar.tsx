@@ -123,12 +123,13 @@ export default function SideBar() {
           className="flex justify-center"
         >
           {!isCollapsed && (
-            <button
+            <motion.button
+              variants={childVariants}
               onClick={() => setIsModalOpen(true)}
               className="w-3/4 px-3 py-2 text-white bg-blue-950 hover:bg-blue-800 rounded-3xl text-center"
             >
               + New Chat
-            </button>
+            </motion.button>
           )}
           <NewChatModal
             isOpen={isModalOpen}
@@ -145,7 +146,7 @@ export default function SideBar() {
               variants={childVariants}
               key={index}
               onClick={() => router.push(`/chat/${item.id}`)}
-              className={`px-4 py-3 flex items-center hover:bg-gray-700 bg-gray-800 cursor-pointer border-b border-gray-500 text-white/80 ${
+              className={`px-4 py-3 flex items-center hover:bg-gray-700 bg-transparent cursor-pointer rounded-2xl text-white/80 ${
                 isCollapsed ? "justify-center" : ""
               }`}
             >

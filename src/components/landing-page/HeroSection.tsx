@@ -2,8 +2,11 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, MessageSquare, Sparkles, Video } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Typewriter } from "react-simple-typewriter";
 
 export const HeroSection = () => {
+  const router = useRouter();
   return (
     <section className="relative z-10 px-6 md:px-12 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
@@ -32,11 +35,19 @@ export const HeroSection = () => {
               className="text-4xl md:text-6xl font-bold leading-tight"
             >
               <span className="bg-gradient-to-r from-amber-100 via-amber-50 to-white bg-clip-text text-transparent">
-                Validate and <br /> Shape Your
+                <Typewriter
+                  words={["Validate", "Build", "Launch"]}
+                  loop={true}
+                  cursor
+                  cursorStyle="|"
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1500}
+                />
               </span>
               <br />
               <span className="bg-gradient-to-r from-amber-100 via-amber-50 to-white bg-clip-text text-transparent">
-                Startup Idea with <br />
+                your idea with <br />
                 Zeltra AI
               </span>
             </motion.h1>
@@ -59,8 +70,9 @@ export const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Button
+                onClick={() => router.push("/chat")}
                 size="lg"
-                className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg group hover:scale-105"
+                className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg group hover:scale-105 cursor-pointer"
               >
                 Talk to the Bot
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -69,7 +81,7 @@ export const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-6 text-lg hover:scale-105"
+                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-6 text-lg hover:scale-105 cursor-pointer"
               >
                 <Video className="ml-2 w-6 h-6 transition-transform" />
                 Watch Demo

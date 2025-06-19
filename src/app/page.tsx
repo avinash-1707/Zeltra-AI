@@ -7,19 +7,18 @@ import { HowItWorks } from "@/components/landing-page/HowItWorks";
 import { LandingNavbar } from "@/components/landing-page/Navbar";
 import { Testimonials } from "@/components/landing-page/Testimonials";
 import { WhyUseZeltra } from "@/components/landing-page/WhyUseZeltra";
+import LoginModal from "@/components/LoginModal";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Home({
   searchParams,
 }: {
   searchParams: { loginRequired?: string };
 }) {
-  const resolvedParams = useParams();
-  const loginRequired = resolvedParams.loginRequired === "true";
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-black/95 relative overflow-hidden">
       <FloatingElements />

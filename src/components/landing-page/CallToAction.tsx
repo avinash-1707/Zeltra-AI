@@ -2,8 +2,12 @@
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+const MotionButton = motion(Button);
 
 export const CallToAction = () => {
+  const router = useRouter();
   return (
     <section className="relative z-10 px-6 md:px-12 py-16 md:py-24 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900">
       <div className="max-w-4xl mx-auto text-center">
@@ -32,15 +36,16 @@ export const CallToAction = () => {
             simple conversation.
           </p>
 
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              className="bg-black/50 text-blue-600 hover:bg-gray-50 px-12 py-6 text-xl font-semibold shadow-2xl group"
-            >
-              Launch Chatbot
-              <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
+          {/* <MotionButton
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => router.push("/chat")}
+            size="lg"
+            className="bg-black/50 text-blue-600 hover:bg-black/80 px-12 py-6 text-xl font-semibold shadow-2xl group cursor-pointer"
+          >
+            Launch Chatbot
+            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </MotionButton> */}
 
           <motion.p
             initial={{ opacity: 0 }}

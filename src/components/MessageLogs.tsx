@@ -92,7 +92,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
             className="flex flex-1 flex-col h-screen items-center justify-center"
           >
             <div className="text-center bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent text-5xl">
-              Hi{user?.name ? `, ${user.name}` : ""}!
+              Hi{user?.name ? `, ${user.name.split(" ")[0]}` : ""}!
             </div>
             <div className="text-center text-white/70 text-2xl">
               What are you thinking about building today?
