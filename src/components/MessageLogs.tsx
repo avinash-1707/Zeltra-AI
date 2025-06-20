@@ -7,6 +7,7 @@ import MessageBox from "./MessageBox";
 import MessageContainer from "./MessageContainer";
 import { v4 } from "uuid";
 import { motion } from "motion/react";
+import { Separator } from "./ui/separator";
 interface Message {
   role: "human" | "ai";
   content: string;
@@ -82,7 +83,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     setLoading(false);
   };
   return (
-    <div className="flex flex-col min-h-screen justify-between">
+    <div className="bg-neutral-950 flex flex-col min-h-screen justify-between">
       <div className="flex-1 p-4 space-y-4 overflow-y-auto mb-20">
         {hasLoaded && messages.length === 0 ? (
           <motion.div
@@ -99,7 +100,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
             </div>
           </motion.div>
         ) : (
-          messages.map((msg) => (
+          messages.map((msg, idx) => (
             <MessageContainer
               key={v4()}
               role={msg.role}
@@ -109,6 +110,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futurepedia.io%2Fai-tools%2Favatar-generator&psig=AOvVaw3ncGsSnztS05jmOKhOfIaI&ust=1750114924940000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjq_6XE9I0DFQAAAAAdAAAAABAE"
               }
               content={msg.content}
+              isStreaming={idx === messages.length - 1 && msg.role === "ai"}
             />
           ))
         )}

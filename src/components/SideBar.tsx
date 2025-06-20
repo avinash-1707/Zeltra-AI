@@ -94,7 +94,7 @@ export default function SideBar() {
   }, [session]);
 
   return (
-    <div className="h-full bg-gray-950">
+    <div className="h-full bg-neutral-900">
       {/* Sidebar */}
       <motion.div
         initial={false}
@@ -104,12 +104,18 @@ export default function SideBar() {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="bg-gray-950 shadow-lg text-white overflow-hidden"
+        className="bg-neutral-900 shadow-lg text-white overflow-hidden"
       >
         {/* Rest of the sidebar content remains the same */}
-        <div className="p-4 flex justify-between items-center bg-gray-950">
+        <div className="p-4 flex justify-between items-center bg-neutral-900">
           {!isCollapsed && (
-            <h2 className="text-xl font-bold text-white">Zeltra AI</h2>
+            <h2
+              role="button"
+              onClick={() => router.push("/")}
+              className="text-xl font-bold text-white pointer-cursor"
+            >
+              Zeltra AI
+            </h2>
           )}
           <button
             onClick={toggleSidebar}
@@ -126,7 +132,7 @@ export default function SideBar() {
             <motion.button
               variants={childVariants}
               onClick={() => setIsModalOpen(true)}
-              className="w-3/4 px-3 py-2 text-white bg-blue-950 hover:bg-blue-800 rounded-3xl text-center"
+              className="w-3/4 px-3 py-2 mt-6 text-white bg-blue-950 hover:bg-blue-800 rounded-3xl text-center"
             >
               + New Chat
             </motion.button>

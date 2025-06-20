@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { motion } from "motion/react";
+import NewChatNavbar from "@/components/NewChatNavbar";
 
 const parentVariants = {
   initial: {},
@@ -61,10 +62,12 @@ export default function ChatHome() {
   }, [status, router]);
 
   const handleNewChat = async (title: string) => {
+    setLoading(true);
     try {
       const res = await axios.post("/api/new-chat", { title });
       const { sessionId } = res.data;
       router.push(`/chat/${sessionId}`);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to create new chat session", err);
     }
@@ -81,20 +84,28 @@ export default function ChatHome() {
 
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-blue-950 via-black to-gray-950 flex justify-center items-center">
+      <NewChatNavbar />
       <NewChatModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onCreate={handleNewChat}
       />
-      <div className="h-3/4 w-1/2 bg-white/5 rounded-2xl px-5 flex flex-col items-center">
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0.4 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="h-3/4 w-1/2 bg-white/5 rounded-2xl px-5 flex flex-col items-center"
+      >
         <div className="w-full flex justify-center py-10">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsModalOpen(true)}
             disabled={loading}
-            className="px-10 py-3 bg-gradient-to-br from-purple-950 via-blue-950 to-indigo-950 text-white rounded hover:bg-blue-700"
+            className="px-10 py-3 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 hover:bg-gradient-to-br hover:from-purple-800 hover:via-blue-800 hover:to-indigo-800 text-white rounded-2xl hover:bg-blue-700 cursor-pointer"
           >
             {loading ? "Creating..." : "➕ New Chat"}
-          </button>
+          </motion.button>
         </div>
         <Separator className="bg-gray-800/50" />
         <motion.div
@@ -124,7 +135,7 @@ export default function ChatHome() {
             ))
           )}
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }

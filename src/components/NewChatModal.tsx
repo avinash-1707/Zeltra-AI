@@ -45,6 +45,12 @@ export default function NewChatModal({
               placeholder="Enter chat title"
               className="w-full p-2 border rounded mb-4 text-white dark:bg-gray-800 dark:border-gray-600"
               value={title}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault(); // Prevent newline
+                  handleCreate(); // Send the message
+                }
+              }}
               onChange={(e) => setTitle(e.target.value)}
             />
             <div className="flex justify-end gap-2">

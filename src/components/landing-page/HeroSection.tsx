@@ -75,7 +75,7 @@ export const HeroSection = () => {
                 className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg group hover:scale-105 cursor-pointer"
               >
                 Talk to the Bot
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-1 w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </Button>
 
               <Button

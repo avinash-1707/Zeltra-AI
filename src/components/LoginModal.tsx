@@ -15,7 +15,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       <div className="bg-neutral-950/80 py-6 px-10 rounded-2xl w-1/3 h-1/2 relative flex flex-col items-center">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 text-xl"
+          className="absolute top-2 right-2 text-gray-500 text-xl cursor-pointer"
         >
           <X className="text-white/20" />
         </button>
@@ -26,7 +26,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
         <div className=" mb-8 flex flex-col items-center justify-evenly w-full h-full">
           <Button
             onClick={() => signIn("google", { callbackUrl: "/chat" })}
-            className="w-full bg-blue-700 text-white text-lg p-5 rounded-3xl mb-2"
+            className="w-full bg-blue-600 hover:bg-blue-800 text-white text-lg p-5 rounded-3xl mb-2 cursor-pointer"
           >
             <span className="mr-2">
               <svg
@@ -59,7 +59,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
           </Button>
           <Button
             onClick={() => signIn("github", { callbackUrl: "/chat" })}
-            className="w-full bg-gray-800 text-lg text-white p-5 rounded-3xl"
+            className="w-full bg-gray-800 text-lg text-white p-5 rounded-3xl cursor-pointer"
           >
             <img
               src="/github-mark-white.png"

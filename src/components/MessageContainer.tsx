@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -6,6 +7,7 @@ interface MessageContainerProps {
   content: string;
   avatarUrl: string;
   name: string;
+  isStreaming?: boolean;
 }
 
 export default function MessageContainer({
@@ -13,11 +15,30 @@ export default function MessageContainer({
   content,
   avatarUrl,
   name,
+  isStreaming = false,
 }: MessageContainerProps) {
+  const [streamedContent, setStreamedContent] = useState(
+    isStreaming ? "" : content
+  );
+
+  useEffect(() => {
+    if (!isStreaming) return;
+
+    let index = 0;
+    const interval = setInterval(() => {
+      setStreamedContent((prev) => prev + content[index]);
+      index++;
+      if (index >= content.length) {
+        clearInterval(interval);
+      }
+    }, 20); // ms per character
+
+    return () => clearInterval(interval);
+  }, [content, isStreaming]);
   return (
     <div
       className={`
-        flex items-end gap-3 my-2
+        w-full flex items-end gap-3 my-2
         ${role == "human" ? "justify-start" : "justify-end"}
       `}
     >
@@ -35,26 +56,18 @@ export default function MessageContainer({
       {/* Message bubble */}
       <div
         className={`
-          max-w-[60%] px-4 py-2 rounded-2xl
+          px-4 py-2 rounded-2xl
           ${
             role === "human"
-              ? "bg-blue-900 text-white rounded-bl-none"
-              : "bg-gray-800 text-white rounded-br-none"
+              ? "max-w-[600px] bg-blue-950/50 text-white rounded-bl-none self-start"
+              : "w-[1200px] my-15 bg-transparent text-white self-end"
           }
         `}
       >
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {streamedContent}
+        </ReactMarkdown>
       </div>
-      {/* AI avatar shown on right */}
-      {role === "ai" && (
-        <div className="flex-shrink-0">
-          <img
-            src="/ai-avatar.jpg"
-            alt="AI Avatar"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-        </div>
-      )}
     </div>
   );
 }

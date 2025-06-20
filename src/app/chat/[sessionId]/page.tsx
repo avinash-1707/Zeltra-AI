@@ -12,7 +12,7 @@ export default function Chat() {
       <div className="overflow-y-auto">
         <SideBar />
       </div>
-      <div className="flex-1 h-full overflow-y-auto bg-black text-white px-32">
+      <div className="flex-1 h-full overflow-y-auto bg-neutral-950 text-white px-32">
         <MessageLogs sessionId={sessionId} />
       </div>
     </div>
