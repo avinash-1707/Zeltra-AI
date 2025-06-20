@@ -1,5 +1,6 @@
 "use client";
 
+import ChatNavbar from "@/components/ChatNavbar";
 import MessageLogs from "@/components/MessageLogs";
 import SideBar from "@/components/SideBar";
 import { useParams } from "next/navigation";
@@ -12,8 +13,14 @@ export default function Chat() {
       <div className="overflow-y-auto">
         <SideBar />
       </div>
-      <div className="flex-1 h-full overflow-y-auto bg-neutral-950 text-white px-32">
-        <MessageLogs sessionId={sessionId} />
+      <div className="flex-1 h-full flex flex-col items-center bg-neutral-950 text-white">
+        <div className="w-full">
+          <ChatNavbar />
+        </div>
+
+        <div className="px-32 overflow-y-auto scrollbar-hide">
+          <MessageLogs sessionId={sessionId} />
+        </div>
       </div>
     </div>
   );

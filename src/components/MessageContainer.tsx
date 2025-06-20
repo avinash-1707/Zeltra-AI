@@ -60,7 +60,7 @@ export default function MessageContainer({
           ${
             role === "human"
               ? "max-w-[600px] bg-blue-950/50 text-white rounded-bl-none self-start"
-              : "w-[1200px] my-15 bg-transparent text-white self-end"
+              : "w-[1200px] my-12 bg-transparent text-white self-end"
           }
         `}
       >

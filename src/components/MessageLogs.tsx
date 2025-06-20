@@ -72,6 +72,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       message: userInput,
     });
 
+    const now = new Date();
     // AI message
     const aiMessage: Message = {
       role: "ai",
@@ -83,8 +84,8 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     setLoading(false);
   };
   return (
-    <div className="bg-neutral-950 flex flex-col min-h-screen justify-between">
-      <div className="flex-1 p-4 space-y-4 overflow-y-auto mb-20">
+    <div className="bg-neutral-950 flex flex-col min-h-screen justify-between items-center">
+      <div className="max-w-4xl mt-3 space-y-4 overflow-y-auto  mb-20">
         {hasLoaded && messages.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -105,10 +106,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
               key={v4()}
               role={msg.role}
               name={user?.name ?? "Anonymous"}
-              avatarUrl={
-                user?.avatarUrl ??
-                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futurepedia.io%2Fai-tools%2Favatar-generator&psig=AOvVaw3ncGsSnztS05jmOKhOfIaI&ust=1750114924940000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjq_6XE9I0DFQAAAAAdAAAAABAE"
-              }
+              avatarUrl={user?.avatarUrl ?? ""}
               content={msg.content}
               isStreaming={idx === messages.length - 1 && msg.role === "ai"}
             />

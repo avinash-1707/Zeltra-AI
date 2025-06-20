@@ -66,10 +66,18 @@ export async function analyzeIdeaChain(
 
   const response = await chain.call({ idea });
 
+  const now = new Date();
+  const nowplus3 = new Date(now.getTime() + 3000);
+
   const saveToDb = await prisma.message.createMany({
     data: [
       { sessionId, role: "human", content: idea },
-      { sessionId, role: "ai", content: response.response },
+      {
+        sessionId,
+        role: "ai",
+        content: response.response,
+        createdAt: nowplus3,
+      },
     ],
   });
 

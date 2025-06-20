@@ -132,3 +132,14 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
