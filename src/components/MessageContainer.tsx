@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -17,24 +17,47 @@ export default function MessageContainer({
   name,
   isStreaming = false,
 }: MessageContainerProps) {
-  const [streamedContent, setStreamedContent] = useState(
-    isStreaming ? "" : content
-  );
+  const [displayContent, setDisplayContent] = useState("");
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (!isStreaming) return;
+    // Clear existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
 
+    if (!isStreaming) {
+      // If not streaming, show full content immediately
+      setDisplayContent(content);
+      return;
+    }
+
+    // If streaming, start the typewriter effect
+    setDisplayContent("");
     let index = 0;
-    const interval = setInterval(() => {
-      setStreamedContent((prev) => prev + content[index]);
-      index++;
-      if (index >= content.length) {
-        clearInterval(interval);
-      }
-    }, 20); // ms per character
 
-    return () => clearInterval(interval);
+    intervalRef.current = setInterval(() => {
+      if (index <= content.length) {
+        setDisplayContent(content.slice(0, index));
+        index++;
+      } else {
+        // Animation complete, clear interval
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+      }
+    }, 20);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [content, isStreaming]);
+
   return (
     <div
       className={`
@@ -56,16 +79,16 @@ export default function MessageContainer({
       {/* Message bubble */}
       <div
         className={`
-          px-4 py-2 rounded-2xl
+          text-md px-4 py-2 rounded-2xl
           ${
             role === "human"
               ? "max-w-[600px] bg-blue-950/50 text-white rounded-bl-none self-start"
-              : "w-[1200px] my-12 bg-transparent text-white self-end"
+              : "w-[1200px] my-8 bg-transparent text-white self-end"
           }
         `}
       >
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {streamedContent}
+          {displayContent}
         </ReactMarkdown>
       </div>
     </div>

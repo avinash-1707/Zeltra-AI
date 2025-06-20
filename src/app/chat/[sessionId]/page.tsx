@@ -18,7 +18,7 @@ export default function Chat() {
           <ChatNavbar />
         </div>
 
-        <div className="px-32 overflow-y-auto scrollbar-hide">
+        <div className="fixed top-16 px-32 pb-12">
           <MessageLogs sessionId={sessionId} />
         </div>
       </div>

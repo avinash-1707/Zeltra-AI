@@ -11,7 +11,7 @@ export default function ChatNavbar() {
         duration: 0.4,
         ease: "easeIn",
       }}
-      className="py-3 min-w-6xl h-15 px-24 bg-gray-600/10 flex justify-between relative top-0 items-center"
+      className="py-3 min-w-6xl h-15 px-24 bg-gray-600/10 flex justify-between sticky top-0 z-50 items-center"
     >
       <div>
         <a
