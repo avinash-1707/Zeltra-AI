@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 export default function Home({
   searchParams,
 }: {
-  searchParams: { loginRequired?: string };
+  searchParams?: { loginRequired?: string };
 }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-black/95 relative overflow-hidden">
