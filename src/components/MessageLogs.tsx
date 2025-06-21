@@ -235,7 +235,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       </div>
 
       <div className="flex justify-center w-full p-4 bg-neutral-950">
-        <MessageBox onSend={handleSend} />
+        <MessageBox disabled={loading} onSend={handleSend} />
       </div>
     </div>
   );

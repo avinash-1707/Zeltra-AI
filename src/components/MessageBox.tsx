@@ -1,14 +1,15 @@
 "use client";
 import { Button } from "./ui/button";
-import { Send } from "lucide-react";
+import { CircleStop, CircleStopIcon, Send } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
+  disabled: boolean;
 }
 
-export default function MessageBox({ onSend }: ChatInputProps) {
+export default function MessageBox({ onSend, disabled }: ChatInputProps) {
   const [message, setMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,10 +38,11 @@ export default function MessageBox({ onSend }: ChatInputProps) {
         value={message}
       />
       <Button
+        disabled={disabled}
         className="mt-6 m-0.5 mr-2.5 border-2 border-black bg-white text-black"
         onClick={handleSend}
       >
-        <Send />
+        {disabled ? <CircleStopIcon /> : <Send />}
       </Button>
     </div>
   );

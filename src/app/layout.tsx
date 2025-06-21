@@ -18,6 +18,7 @@ const shareTechMono = Share_Tech_Mono({
 export const metadata: Metadata = {
   title: "Zeltra AI",
   description: "An AI tool to get you the prompt for your idea.",
+  icons: { icon: "/zeltra-logo.png" },
 };
 
 export default function RootLayout({

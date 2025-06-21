@@ -121,13 +121,19 @@ export function LandingNavbar() {
                 </a>
               ))}
               <div className="flex w-full flex-col gap-4">
-                <NavbarButton
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  variant="primary"
-                  className="w-full"
-                >
-                  Login
-                </NavbarButton>
+                {session ? (
+                  <Profile />
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <NavbarButton
+                      onClick={() => setOpen(true)}
+                      variant="primary"
+                      className="rounded-4xl"
+                    >
+                      Login
+                    </NavbarButton>
+                  </div>
+                )}
               </div>
             </MobileNavMenu>
           </MobileNav>
