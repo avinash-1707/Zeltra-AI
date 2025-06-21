@@ -23,7 +23,7 @@ export default function Profile() {
           className="w-fit h-fit px-2 py-1 hover:bg-white/30 bg-white/20 rounded-full flex justify-between items-center cursor-pointer z-50"
           role="button"
         >
-          <img
+          <Image
             src={user?.avatarUrl as string}
             width={30}
             height={30}

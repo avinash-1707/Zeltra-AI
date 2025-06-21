@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { Button } from "./ui/button";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
   return (
@@ -61,7 +62,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
             onClick={() => signIn("github", { callbackUrl: "/chat" })}
             className="w-full bg-gray-800 text-lg text-white p-5 rounded-3xl cursor-pointer"
           >
-            <img
+            <Image
               src="/github-mark-white.png"
               alt="github logo"
               height={25}

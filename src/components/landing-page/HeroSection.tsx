@@ -133,8 +133,8 @@ export const HeroSection = () => {
                   className="bg-blue-950 rounded-2xl rounded-br-none p-4 ml-4"
                 >
                   <p className="text-white text-sm">
-                    Hi! I'm here to help you validate and shape your startup
-                    idea. What's your vision?
+                    Hi! I{"'"}m here to help you validate and shape your startup
+                    idea. What{"'"}s your vision?
                   </p>
                 </motion.div>
 
@@ -157,7 +157,7 @@ export const HeroSection = () => {
                   className="bg-blue-950 rounded-2xl rounded-br-none p-4 ml-4"
                 >
                   <p className="text-white text-sm">
-                    Great! Let's dive deeper. What specific problem do busy
+                    Great! Let{"'"}s dive deeper. What specific problem do busy
                     professionals face with current food delivery options?
                   </p>
                 </motion.div>

@@ -86,7 +86,9 @@ export const Testimonials = () => {
                   </div>
 
                   <blockquote className="text-gray-300 mb-6 leading-relaxed">
-                    "{testimonial.quote}"
+                    {'"'}
+                    {testimonial.quote}
+                    {'"'}
                   </blockquote>
 
                   <div className="flex items-center">

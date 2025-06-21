@@ -28,8 +28,8 @@ export const CallToAction = () => {
           </h2>
 
           <p className="text-xl text-blue-100/50 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Join thousands of entrepreneurs who've transformed their vague ideas
-            into successful prototypes. Your startup journey begins with a
+            Join thousands of entrepreneurs who{"'"}ve transformed their vague
+            ideas into successful prototypes. Your startup journey begins with a
             simple conversation.
           </p>
 

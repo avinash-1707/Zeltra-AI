@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -68,10 +69,12 @@ export default function MessageContainer({
       {/* Human avatar shown on left */}
       {role === "human" && (
         <div className="flex-shrink-0">
-          <img
+          <Image
             src={avatarUrl}
             alt="User Avatar"
-            className="w-10 h-10 rounded-full object-cover"
+            height={32}
+            width={32}
+            className="w-8 h-8 rounded-full object-cover"
           />
         </div>
       )}
