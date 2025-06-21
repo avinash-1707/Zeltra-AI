@@ -1,10 +1,7 @@
 "use client";
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-const MotionButton = motion(Button);
 
 export const CallToAction = () => {
   const router = useRouter();
@@ -35,17 +32,6 @@ export const CallToAction = () => {
             into successful prototypes. Your startup journey begins with a
             simple conversation.
           </p>
-
-          {/* <MotionButton
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/chat")}
-            size="lg"
-            className="bg-black/50 text-blue-600 hover:bg-black/80 px-12 py-6 text-xl font-semibold shadow-2xl group cursor-pointer"
-          >
-            Launch Chatbot
-            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-          </MotionButton> */}
 
           <motion.p
             initial={{ opacity: 0 }}
