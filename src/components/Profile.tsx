@@ -37,7 +37,10 @@ export default function Profile() {
         <DropdownMenuItem role="button" onClick={() => router.push("/chat")}>
           Start Chat
         </DropdownMenuItem>
-        <DropdownMenuItem role="button" onClick={() => signOut()}>
+        <DropdownMenuItem
+          role="button"
+          onClick={() => signOut({ callbackUrl: "/" })}
+        >
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
