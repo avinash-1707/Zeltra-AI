@@ -1,4 +1,3 @@
-"use client";
 import { CallToAction } from "@/components/landing-page/CallToAction";
 import FloatingElements from "@/components/landing-page/FloatingElements";
 import { Footer } from "@/components/landing-page/Footer";
@@ -7,23 +6,20 @@ import { HowItWorks } from "@/components/landing-page/HowItWorks";
 import { LandingNavbar } from "@/components/landing-page/Navbar";
 import { Testimonials } from "@/components/landing-page/Testimonials";
 import { WhyUseZeltra } from "@/components/landing-page/WhyUseZeltra";
-import LoginModal from "@/components/LoginModal";
-import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
-import { motion } from "motion/react";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams?: { loginRequired?: string };
-}) {
+interface PageProps {
+  searchParams: Promise<{
+    loginRequired?: string;
+  }>;
+}
+
+export default async function Home({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-black/95 relative overflow-hidden">
       <FloatingElements />
 
-      <LandingNavbar />
+      <LandingNavbar searchParamsPromise={searchParams} />
 
       {/* Hero Section */}
       <HeroSection />

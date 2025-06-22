@@ -10,22 +10,27 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useSession } from "next-auth/react";
 import Profile from "../Profile";
 import { useSearchParams, useRouter } from "next/navigation";
 import LoginModal from "../LoginModal";
 
-export function LandingNavbar() {
+interface Props {
+  searchParamsPromise: Promise<{
+    loginRequired?: string;
+  }>;
+}
+
+export function LandingNavbar({ searchParamsPromise }: Props) {
+  const searchParams = use(searchParamsPromise);
+  const loginRequired = searchParams?.loginRequired === "true";
   const [open, setOpen] = useState(false);
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   // Open modal if ?loginRequired=true
   useEffect(() => {
-    const loginRequired = searchParams.get("loginRequired") === "true";
-
     if (loginRequired) {
       setOpen(true);
 
