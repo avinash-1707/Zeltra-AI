@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🚀 Zeltra AI
 
-First, run the development server:
+Zeltra AI is a chatbot that helps founders refine and structure their startup ideas through focused, LLM-powered conversations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Built using **LangChain** and **Gemini**, it guides users from raw ideas to more defined directions by providing:
+
+- 🧠 Idea breakdown (market, problem, solution)  
+- 🔍 Niche suggestions  
+- ✍️ Tailored MVP-building prompts  
+
+---
+
+## 🔧 Tech Stack
+
+- **Framework**: Next.js (App Router) + TypeScript  
+- **LLM**: Gemini API via LangChain  
+- **Database**: PostgreSQL with Prisma ORM  
+- **Memory**: BufferMemory (for short-term chat context)  
+- **Authentication**: NextAuth.js  
+- **Deployment**: Vercel  
+
+---
+
+## 📁 Folder Structure
+
+```
+zeltra-ai/
+├── app/            → Next.js App Router
+│   ├── api/        → API routes (/analyze, /niche-insights)
+│   └── chat/       → Chat interface
+├── components/     → Reusable UI components
+├── context/        → Global state/context providers
+├── hooks/          → Custom React hooks
+├── lib/            → LangChain logic
+├── prisma/         → Prisma schema/migrations
+├── schemas/        → Zod schemas
+├── styles/         → Global styles (Tailwind)
+└── utils/          → Utility functions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repo**
 
-## Learn More
+```
+git clone https://github.com/avinash-1707/zeltra-ai.git
+cd zeltra-ai
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Set up environment variables**
 
-## Deploy on Vercel
+Create a `.env` file in the root with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+DATABASE_URL=your_postgres_url
+NEXTAUTH_SECRET=your_secret
+NEXTAUTH_URL=http://localhost:3000
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GOOGLE_API_KEY=your_gemini_api_key
+```
+
+4. **Run Prisma**
+
+```
+npx prisma generate
+npx prisma migrate dev
+```
+
+5. **Start the dev server**
+
+```
+npm run dev
+```
+
+---
+
+## 🛠️ Deployment
+
+Deployed via [Vercel](https://vercel.com). Just connect the repo and add your environment variables.
+
+---
+
+## 🤝 Contributing
+
+Open to contributions, ideas, and feedback. Feel free to open an issue or PR!
+
+---
+
+## 👤 Author
+
+**Avinash Narwariya**  
+[LinkedIn]([https://www.linkedin.com/in/avinashnarwariya](https://www.linkedin.com/in/avinash-narwariya-392513336/))
