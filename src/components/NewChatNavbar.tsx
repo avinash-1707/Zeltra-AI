@@ -13,7 +13,7 @@ export default function NewChatNavbar() {
         duration: 0.4,
         ease: "easeIn",
       }}
-      className="mt-3 w-4xl h-12 px-18 mx-24 rounded-3xl bg-transparent flex justify-between fixed top-0 items-center"
+      className="mt-3 w-full lg:w-4xl h-12 px-4 lg:px-18 mx-24 rounded-3xl bg-transparent flex justify-between fixed top-0 items-center"
     >
       <div>
         <Link

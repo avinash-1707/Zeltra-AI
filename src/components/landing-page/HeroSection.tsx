@@ -195,19 +195,6 @@ export const HeroSection = () => {
             >
               <Sparkles className="w-8 h-8 text-white" />
             </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-r from-white to-gray-400 rounded-full flex items-center justify-center shadow-lg"
-            >
-              <MessageSquare className="w-6 h-6 text-black" />
-            </motion.div>
           </motion.div>
         </div>
       </div>

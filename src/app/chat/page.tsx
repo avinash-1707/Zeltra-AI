@@ -94,7 +94,7 @@ export default function ChatHome() {
         initial={{ scale: 0.8, opacity: 0.4 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="h-3/4 w-1/2 bg-white/10 rounded-2xl px-5 flex flex-col items-center"
+        className="h-3/4 w-full mx-2 lg:w-1/2 bg-white/10 rounded-2xl lg:px-5 flex flex-col items-center"
       >
         <div className="w-full flex justify-center py-10">
           <motion.button

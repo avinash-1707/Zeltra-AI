@@ -13,7 +13,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       exit={{ scale: 0.7, opacity: 0 }}
       className="fixed inset-0 flex items-center justify-center bg-black/30 z-50 backdrop-blur"
     >
-      <div className="bg-neutral-950/80 py-6 px-10 rounded-2xl w-1/3 h-1/2 relative flex flex-col items-center">
+      <div className="bg-neutral-950/80 py-6 px-10 mx-3.5 rounded-2xl w-full h-1/3 lg:w-1/3 lg:h-1/2 relative flex flex-col items-center">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 text-xl cursor-pointer"

@@ -35,7 +35,7 @@ export default function NewChatModal({
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.6, opacity: 0 }}
-            className="bg-gray-950 dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-xl"
+            className="bg-gray-950 dark:bg-gray-900 rounded-xl p-6 mx-3 w-full max-w-md shadow-xl"
           >
             <h2 className="text-lg font-semibold mb-4 text-white/80">
               Name your chat
