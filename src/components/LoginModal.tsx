@@ -23,7 +23,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
         <h2 className="text-md lg:text-2xl font-semibold mb-4 text-white">
           Sign In to
         </h2>
-        <h2 className="text-3xl lg:text-6xl font-bold mb-4 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
+        <h2 className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
           Zeltra AI
         </h2>
         <div className=" mb-8 flex flex-col items-center justify-evenly w-full h-full">

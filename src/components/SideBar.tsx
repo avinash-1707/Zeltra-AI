@@ -145,7 +145,7 @@ export default function SideBar() {
         </motion.div>
         <motion.nav
           variants={parentVariants}
-          className="mt-6 flex flex-col h-fit flex-1"
+          className="mt-6 flex flex-col h-fit flex-1 overflow-y-auto"
         >
           {chatLogs.map((item, index) => (
             <motion.div

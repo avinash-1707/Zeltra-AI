@@ -13,17 +13,8 @@ export default function ChatNavbar() {
         duration: 0.4,
         ease: "easeIn",
       }}
-      className="py-3 min-w-6xl h-15 px-24 bg-gray-600/10 flex justify-between sticky top-0 z-50 items-center"
+      className="py-3 min-w-6xl h-15 px-24 bg-gray-600/10 flex justify-end sticky top-0 z-50 items-center"
     >
-      <div>
-        <Link
-          href="/"
-          className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
-        >
-          <Image src="/zeltra-logo.png" alt="logo" width={30} height={30} />
-          <span className="font-medium ml-1 text-white">Zeltra AI</span>
-        </Link>
-      </div>
       <Profile />
     </motion.div>
   );
