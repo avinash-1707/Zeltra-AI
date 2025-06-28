@@ -10,7 +10,7 @@ import { prisma } from "../prisma";
 // Setting up Gemini
 const model = new ChatGoogleGenerativeAI({
   model: "gemini-2.0-flash",
-  temperature: 0.5,
+  temperature: 0.8,
   maxOutputTokens: 2048,
   topP: 1,
   topK: 40,
