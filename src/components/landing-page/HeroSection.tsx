@@ -82,6 +82,12 @@ export const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
+                onClick={() =>
+                  window.open(
+                    "https://www.linkedin.com/posts/avinash-narwariya-392513336_zeltraai-buildinpublic-aiforfounders-activity-7344215424906981376-YsJQ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFRwA14B9Sig-oY6tuNOiEnxCiKqOAzyi6Y",
+                    "_blank"
+                  )
+                }
                 className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-6 text-lg hover:scale-105 cursor-pointer"
               >
                 <Video className="ml-2 w-6 h-6 transition-transform" />
