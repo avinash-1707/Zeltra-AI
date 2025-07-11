@@ -4,12 +4,17 @@ import { useSession } from "next-auth/react";
 import { User } from "next-auth";
 import MessageBox from "./MessageBox";
 import MessageContainer from "./MessageContainer";
-import { v4 } from "uuid";
 import { motion } from "motion/react";
+
 interface Message {
   role: "human" | "ai";
   content: string;
   createdAt: Date;
+}
+
+interface messageboxInput {
+  userInput: string;
+  model: string;
 }
 
 export default function MessageLogs({ sessionId }: { sessionId: string }) {
@@ -139,7 +144,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     };
   }, [streamingMessageIndex]);
 
-  const handleSend = async (userInput: string) => {
+  const handleSend = async ({ userInput, model }: messageboxInput) => {
     if (!userInput.trim()) return;
     setLoading(true);
 

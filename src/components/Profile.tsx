@@ -24,10 +24,10 @@ export default function Profile() {
           role="button"
         >
           <Image
-            src={user?.avatarUrl as string}
+            src={user?.avatarUrl || "/default-avatar.png"}
             width={30}
             height={30}
-            alt={user?.name as string}
+            alt={(user?.name as string) || "User"}
             className="rounded-full"
           />
           <ChevronDown className="text-white ml-0.5" height={20} width={20} />

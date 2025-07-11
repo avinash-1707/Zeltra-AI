@@ -70,7 +70,7 @@ export default function MessageContainer({
       {role === "human" && (
         <div className="flex-shrink-0">
           <Image
-            src={avatarUrl}
+            src={avatarUrl || "/default-avatar.png"}
             alt="User Avatar"
             height={32}
             width={32}
