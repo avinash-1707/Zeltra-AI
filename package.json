@@ -10,8 +10,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@langchain/core": "^0.3.58",
+    "@langchain/core": "^0.3.62",
     "@langchain/google-genai": "^0.2.11",
+    "@langchain/groq": "^0.2.3",
     "@prisma/client": "^6.9.0",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-select": "^2.2.5",

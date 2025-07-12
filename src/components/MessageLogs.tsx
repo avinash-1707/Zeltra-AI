@@ -165,6 +165,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       const res = await axios.post("/api/analyze", {
         sessionId,
         message: userInput,
+        model,
       });
 
       // AI message

@@ -6,21 +6,57 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { prisma } from "../prisma";
+import { BaseChatModel } from "@langchain/core/language_models/chat_models";
+import { ChatGroq } from "@langchain/groq";
 
-// Setting up Gemini
-const model = new ChatGoogleGenerativeAI({
-  model: "gemini-2.0-flash",
-  temperature: 0.8,
-  maxOutputTokens: 2048,
-  topP: 1,
-  topK: 40,
-  apiKey: process.env.GEMINI_API_KEY,
-});
+const modelCache = new Map<string, BaseChatModel>();
+
+function getModelByName(modelName: string): BaseChatModel {
+  if (modelCache.has(modelName)) {
+    return modelCache.get(modelName)!;
+  }
+
+  let model: BaseChatModel;
+
+  switch (modelName) {
+    case "gemini-2.0-flash":
+      model = new ChatGoogleGenerativeAI({
+        model: modelName,
+        temperature: 0.8,
+        maxOutputTokens: 2048,
+        topP: 1,
+        topK: 40,
+        apiKey: process.env.GEMINI_API_KEY,
+      });
+      break;
+
+    case "llama-3.3-70b-versatile":
+    case "llama-3.1-8b-instant":
+      model = new ChatGroq({
+        model: modelName,
+        temperature: 0.8,
+        maxTokens: undefined,
+        maxRetries: 2,
+        apiKey: process.env.GROQ_API_KEY,
+      });
+      break;
+
+    default:
+      throw new Error(`Unsupported model: ${modelName}`);
+  }
+
+  modelCache.set(modelName, model);
+  return model;
+}
 
 export async function analyzeIdeaChain(
   idea: string,
-  sessionId: string
+  sessionId: string,
+  modelName: string
 ): Promise<string> {
+  //creating the model
+  const model = getModelByName(modelName);
+
   // Loading messages from db
   const messagesFromDB = await prisma.message.findMany({
     where: { sessionId },
@@ -45,7 +81,7 @@ export async function analyzeIdeaChain(
     returnMessages: true,
   });
 
-  const contexualizeQSystemPrompt = `You are a highly intelligent and visionary startup expert and smart entrepreneur. Your name is Zeltra. Your role is to help users refine their startup ideas and shape them into clear, well-defined, and executable prototypes.
+  const systemPrompt = `You are a highly intelligent and visionary startup expert and smart entrepreneur. Your name is Zeltra. Your role is to help users refine their startup ideas and shape them into clear, well-defined, and executable prototypes.
 
 Your main responsibilities are:
 
@@ -90,7 +126,7 @@ After gathering the answers:
 Your mission is to turn raw startup thoughts into clarity and action.`;
 
   const contexualizeQPrompt = ChatPromptTemplate.fromMessages([
-    ["system", contexualizeQSystemPrompt],
+    ["system", systemPrompt],
     new MessagesPlaceholder("chat_context"),
     ["human", "{idea}"],
   ]);

@@ -8,7 +8,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -54,7 +53,12 @@ export default function MessageBox({ onSend, disabled }: ChatInputProps) {
           <SelectContent>
             <SelectGroup>
               <SelectItem value="gemini-2.0-flash">gemini-2.0-flash</SelectItem>
-              <SelectItem value="llama-70b-8192">llama-70b-8192</SelectItem>
+              <SelectItem value="llama-3.3-70b-versatile">
+                llama-3.3-70b-versatile
+              </SelectItem>
+              <SelectItem value="llama-3.1-8b-instant">
+                llama-3.1-8b-instant
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

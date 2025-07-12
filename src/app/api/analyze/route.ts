@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { sessionId, message } = AnalyzeSchema.parse(await req.json());
+    const { sessionId, message, model } = AnalyzeSchema.parse(await req.json());
 
     if (!message) {
       return NextResponse.json(
@@ -18,9 +18,8 @@ export async function POST(req: NextRequest) {
     }
 
     const users = await prisma.user.findMany();
-    console.log(users);
 
-    const analysis = await analyzeIdeaChain(message, sessionId);
+    const analysis = await analyzeIdeaChain(message, sessionId, model);
 
     return NextResponse.json({
       success: true,
