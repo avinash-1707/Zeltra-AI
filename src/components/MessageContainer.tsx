@@ -49,7 +49,7 @@ export default function MessageContainer({
           intervalRef.current = null;
         }
       }
-    }, 20);
+    }, 5);
 
     return () => {
       if (intervalRef.current) {

@@ -178,7 +178,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       // Add the message and set it to stream
       setMessages((prev) => {
         const newMessages = [...prev, aiMessage];
-        setStreamingMessageIndex(newMessages.length - 1); // Set the index of the streaming message
+        setStreamingMessageIndex(newMessages.length - 1); // setting the index of the streaming message
         return newMessages;
       });
 
@@ -202,8 +202,8 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
         <div className="max-w-4xl mx-auto px-4 space-y-4">
           {hasLoaded && messages.length === 0 ? (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.4 }}
               className="flex flex-1 flex-col h-full items-center justify-center min-h-[60vh]"
             >

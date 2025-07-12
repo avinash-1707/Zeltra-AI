@@ -112,7 +112,7 @@ export default function SideBar() {
             <h2
               role="button"
               onClick={() => router.push("/")}
-              className="text-xl font-bold text-white pointer-cursor"
+              className="text-xl font-bold text-white cursor-pointer"
             >
               Zeltra AI
             </h2>
