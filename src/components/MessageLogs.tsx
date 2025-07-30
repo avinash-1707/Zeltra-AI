@@ -5,6 +5,7 @@ import { User } from "next-auth";
 import MessageBox from "./MessageBox";
 import MessageContainer from "./MessageContainer";
 import { motion } from "motion/react";
+import { useChatDraftStore } from "@/context/store";
 
 interface Message {
   role: "human" | "ai";
@@ -17,9 +18,16 @@ interface messageboxInput {
   model: string;
 }
 
+interface ChatDraftStore {
+  draftMessage: string;
+  setDraftMessage: (msg: string) => void;
+  clearDraftMessage: () => void;
+}
 export default function MessageLogs({ sessionId }: { sessionId: string }) {
   const { data: session } = useSession();
   const user = session?.user as User | undefined;
+  const { draftMessage, clearDraftMessage } =
+    useChatDraftStore() as ChatDraftStore;
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -143,6 +151,15 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       }
     };
   }, [streamingMessageIndex]);
+
+  useEffect(() => {
+    const setInitialMessage = async () => {
+      if (draftMessage.trim()) {
+        handleSend({ userInput: draftMessage, model: "gemini-2.0-flash" });
+      }
+      clearDraftMessage();
+    };
+  }, [sessionId]);
 
   const handleSend = async ({ userInput, model }: messageboxInput) => {
     if (!userInput.trim()) return;

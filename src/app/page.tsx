@@ -6,6 +6,7 @@ import { HowItWorks } from "@/components/landing-page/HowItWorks";
 import { LandingNavbar } from "@/components/landing-page/Navbar";
 import { Testimonials } from "@/components/landing-page/Testimonials";
 import { WhyUseZeltra } from "@/components/landing-page/WhyUseZeltra";
+import NewMessageBox from "@/components/NewMessageBox";
 import React, { useEffect, useState } from "react";
 
 interface PageProps {
@@ -23,6 +24,8 @@ export default async function Home({ searchParams }: PageProps) {
 
       {/* Hero Section */}
       <HeroSection />
+
+      <NewMessageBox />
 
       {/* How It Works */}
       <HowItWorks />

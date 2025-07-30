@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { createNewChat } from "@/lib/services/chatServices";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,15 +14,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Create new chat session for the user
-    const newChat = await prisma.chatSession.create({
-      data: {
-        title: title,
-        userId: session.user.id,
-      },
-    });
+    const res = await createNewChat({ title, userId: session.user.id });
 
     return NextResponse.json({
-      sessionId: newChat.id,
+      sessionId: res.sessionId,
     });
   } catch (err) {
     console.error("Failed to create new chat session:", err);
