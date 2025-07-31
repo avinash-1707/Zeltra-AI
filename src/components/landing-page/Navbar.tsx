@@ -14,8 +14,9 @@ import { use, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useSession } from "next-auth/react";
 import Profile from "../Profile";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import LoginModal from "../LoginModal";
+import { ModeToggle } from "../mode-toggle";
 
 interface Props {
   searchParamsPromise: Promise<{
@@ -53,10 +54,6 @@ export function LandingNavbar({ searchParamsPromise }: Props) {
       name: "Features",
       link: "#features",
     },
-    {
-      name: "Testimonials",
-      link: "#testimonials",
-    },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -86,19 +83,22 @@ export function LandingNavbar({ searchParamsPromise }: Props) {
           <NavBody>
             <NavbarLogo />
             <NavItems items={navItems} />
-            {session ? (
-              <Profile />
-            ) : (
-              <div className="flex items-center gap-4">
-                <NavbarButton
-                  onClick={() => setOpen(true)}
-                  variant="primary"
-                  className="rounded-4xl"
-                >
-                  Login
-                </NavbarButton>
-              </div>
-            )}
+            <div className="flex gap-3">
+              <ModeToggle />
+              {session ? (
+                <Profile />
+              ) : (
+                <div className="flex items-center gap-4">
+                  <NavbarButton
+                    onClick={() => setOpen(true)}
+                    variant="primary"
+                    className="rounded-4xl"
+                  >
+                    Login
+                  </NavbarButton>
+                </div>
+              )}
+            </div>
           </NavBody>
 
           {/* Mobile Navigation */}

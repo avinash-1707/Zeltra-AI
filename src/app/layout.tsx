@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Orbitron, Share_Tech_Mono } from "next/font/google";
+import { Nunito_Sans, Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const ns = Nunito_Sans({
   subsets: ["latin"],
   weight: ["400", "700"], // optional: define your needed weights
 });
@@ -29,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body
-          className={`${orbitron.variable} ${shareTechMono.variable} antialiased`}
-        >
-          {children}
+        <body className={`${ns.className} antialiased`}>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            {children}
+          </ThemeProvider>
         </body>
       </AuthProvider>
     </html>

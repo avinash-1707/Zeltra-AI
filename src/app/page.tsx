@@ -1,12 +1,10 @@
-import { CallToAction } from "@/components/landing-page/CallToAction";
-import FloatingElements from "@/components/landing-page/FloatingElements";
 import { Footer } from "@/components/landing-page/Footer";
 import { HeroSection } from "@/components/landing-page/HeroSection";
 import { HowItWorks } from "@/components/landing-page/HowItWorks";
 import { LandingNavbar } from "@/components/landing-page/Navbar";
-import { Testimonials } from "@/components/landing-page/Testimonials";
-import { WhyUseZeltra } from "@/components/landing-page/WhyUseZeltra";
+
 import NewMessageBox from "@/components/NewMessageBox";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface PageProps {
@@ -17,8 +15,16 @@ interface PageProps {
 
 export default async function Home({ searchParams }: PageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-black/95 relative overflow-hidden">
-      <FloatingElements />
+    <div className="min-h-screen relative overflow-hidden">
+      <Image
+        src="/zeltra-bg-grainy-blur.jpg"
+        alt="zeltra-bg"
+        width={3000}
+        height={2000}
+        aria-hidden="true"
+        className="fixed inset-0 w-full h-full object-cover -z-10 pointer-events-none select-none"
+      />
+      <div className="fixed inset-0 bg-black/20 dark:bg-white/20 pointer-events-none -z-5"></div>
 
       <LandingNavbar searchParamsPromise={searchParams} />
 
@@ -29,15 +35,6 @@ export default async function Home({ searchParams }: PageProps) {
 
       {/* How It Works */}
       <HowItWorks />
-
-      {/* Why Use Zeltra */}
-      <WhyUseZeltra />
-
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* Call to Action */}
-      <CallToAction />
 
       {/* Footer */}
       <Footer />
