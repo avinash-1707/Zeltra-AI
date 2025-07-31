@@ -154,7 +154,6 @@ export async function analyzeIdeaChain(
     ],
   });
 
-  console.log(response.response);
   if (saveToDb) return response.response;
   return "There is an error in saving message to Db";
 }

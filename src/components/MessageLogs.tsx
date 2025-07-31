@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
@@ -35,6 +35,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     number | null
   >(null);
   const hasMounted = useRef(false);
+  const initialMessageSent = useRef(false);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -85,7 +86,6 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
       try {
         const res = await axios.get(`/api/get-messages?sessionId=${sessionId}`);
         const { messages } = await res.data;
-        console.log(messages);
 
         const parsed: Message[] = messages.map((msg: any) => ({
           ...msg,
@@ -153,66 +153,68 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   }, [streamingMessageIndex]);
 
   useEffect(() => {
-    const setInitialMessage = async () => {
-      if (draftMessage.trim()) {
-        handleSend({ userInput: draftMessage, model: "gemini-2.0-flash" });
-      }
+    if (hasLoaded && draftMessage.trim() && !initialMessageSent.current) {
+      initialMessageSent.current = true;
+      handleSend({ userInput: draftMessage, model: "gemini-2.0-flash" });
       clearDraftMessage();
-    };
-  }, [sessionId]);
+    }
+  }, [hasLoaded, draftMessage, clearDraftMessage]);
 
-  const handleSend = async ({ userInput, model }: messageboxInput) => {
-    if (!userInput.trim()) return;
-    setLoading(true);
+  const handleSend = useCallback(
+    async ({ userInput, model }: messageboxInput) => {
+      if (!userInput.trim()) return;
+      setLoading(true);
 
-    // UI update
-    const userMessage: Message = {
-      role: "human",
-      createdAt: new Date(),
-      content: userInput,
-    };
-    setMessages((prev) => [...prev, userMessage]);
-
-    setTimeout(() => {
-      scrollToBottom();
-    }, 100);
-
-    try {
-      // sending to chatbot
-      const res = await axios.post("/api/analyze", {
-        sessionId,
-        message: userInput,
-        model,
-      });
-
-      // AI message
-      const aiMessage: Message = {
-        role: "ai",
-        content: res.data.content,
+      // UI update
+      const userMessage: Message = {
+        role: "human",
         createdAt: new Date(),
+        content: userInput,
       };
-
-      // Add the message and set it to stream
-      setMessages((prev) => {
-        const newMessages = [...prev, aiMessage];
-        setStreamingMessageIndex(newMessages.length - 1); // setting the index of the streaming message
-        return newMessages;
-      });
+      setMessages((prev) => [...prev, userMessage]);
 
       setTimeout(() => {
         scrollToBottom();
       }, 100);
 
-      // Stop streaming after the animation completes
-      setTimeout(() => {
-        setStreamingMessageIndex(null);
-      }, res.data.content.length * 20 + 500); // 20ms per character + buffer
-    } catch (error) {
-      console.error("Error sending message:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        // sending to chatbot
+        const res = await axios.post("/api/analyze", {
+          sessionId,
+          message: userInput,
+          model,
+        });
+
+        // AI message
+        const aiMessage: Message = {
+          role: "ai",
+          content: res.data.content,
+          createdAt: new Date(),
+        };
+
+        // Add the message and set it to stream
+        setMessages((prev) => {
+          const newMessages = [...prev, aiMessage];
+          setStreamingMessageIndex(newMessages.length - 1); // setting the index of the streaming message
+          return newMessages;
+        });
+
+        setTimeout(() => {
+          scrollToBottom();
+        }, 100);
+
+        // Stop streaming after the animation completes
+        setTimeout(() => {
+          setStreamingMessageIndex(null);
+        }, res.data.content.length * 20 + 500); // 20ms per character + buffer
+      } catch (error) {
+        console.error("Error sending message:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [sessionId]
+  );
   return (
     <div className="bg-neutral-950 flex flex-col h-screen">
       <div className="messages-container h-[calc(100vh-160px)] overflow-y-auto scrollbar-hide">

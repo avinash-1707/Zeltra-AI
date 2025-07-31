@@ -2,7 +2,6 @@ import { suggestChatName } from "@/lib/chains/chatName";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
-import axios from "axios";
 import { createNewChat } from "@/lib/services/chatServices";
 
 export async function POST(req: NextRequest) {
@@ -14,7 +13,9 @@ export async function POST(req: NextRequest) {
 
     const session = await getServerSession(authOptions);
     if (!session || !session.user?.id) {
-      return NextResponse.redirect("/?loginRequired=true");
+      return NextResponse.json({
+        message: "Please login to start talking to zeltra",
+      });
     }
 
     const chatTitle = await suggestChatName(message);
