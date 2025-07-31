@@ -17,21 +17,19 @@ export default async function Home({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <Image
-        src="/zeltra-bg-grainy-blur.jpg"
+        src="/zeltra-bg.jpg"
         alt="zeltra-bg"
         width={3000}
         height={2000}
         aria-hidden="true"
-        className="fixed inset-0 w-full h-full object-cover -z-10 pointer-events-none select-none"
+        className="fixed inset-0 w-full h-full object-cover blur-lg -z-10 pointer-events-none select-none"
       />
-      <div className="fixed inset-0 bg-black/20 dark:bg-white/20 pointer-events-none -z-5"></div>
+      <div className="fixed inset-0 dark:bg-black/20 bg-white/20 pointer-events-none -z-5"></div>
 
       <LandingNavbar searchParamsPromise={searchParams} />
 
       {/* Hero Section */}
       <HeroSection />
-
-      <NewMessageBox />
 
       {/* How It Works */}
       <HowItWorks />

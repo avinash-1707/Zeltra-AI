@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body className={`${ns.className} antialiased`}>
           <ThemeProvider attribute="class" defaultTheme="dark">
