@@ -51,12 +51,10 @@ export function LandingNavbar({ searchParamsPromise }: Props) {
       link: "#how-it-works",
     },
     {
-      name: "Features",
-      link: "#features",
+      name: "Go to Chat",
+      link: "/chat",
     },
   ];
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <>
@@ -83,7 +81,7 @@ export function LandingNavbar({ searchParamsPromise }: Props) {
           <NavBody>
             <NavbarLogo />
             <NavItems items={navItems} />
-            <div className="flex gap-3">
+            <div className="flex gap-5 items-center">
               <ModeToggle />
               {session ? (
                 <Profile />

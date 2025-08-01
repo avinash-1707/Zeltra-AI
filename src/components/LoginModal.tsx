@@ -28,7 +28,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
         </h2>
         <div className=" mb-8 flex flex-col items-center justify-evenly w-full h-full">
           <Button
-            onClick={() => signIn("google", { callbackUrl: "/chat" })}
+            onClick={() => signIn("google")}
             className="w-full bg-blue-600 hover:bg-blue-800 text-white text-lg p-5 rounded-3xl mb-2 cursor-pointer"
           >
             <span className="mr-2">
@@ -61,7 +61,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
             Sign in with Google
           </Button>
           <Button
-            onClick={() => signIn("github", { callbackUrl: "/chat" })}
+            onClick={() => signIn("github")}
             className="w-full bg-gray-800 text-lg text-white p-5 rounded-3xl cursor-pointer"
           >
             <Image

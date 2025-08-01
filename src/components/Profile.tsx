@@ -20,7 +20,7 @@ export default function Profile() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div
-          className="w-fit h-fit px-2 py-1 hover:bg-white/30 bg-white/20 rounded-full flex justify-between items-center cursor-pointer z-50"
+          className="w-fit h-fit px-2 py-1 hover:bg-white/30 bg-white/20 dark:hover:bg-black/30 dark:bg-black/20 transition-colors duration-300 rounded-full flex justify-between items-center cursor-pointer z-50"
           role="button"
         >
           <Image

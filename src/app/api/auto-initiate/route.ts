@@ -13,13 +13,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "You need to send a message" });
 
     const session = await getServerSession(authOptions);
-    if (!session || !session.user?.id) {
-      const reqUrl = new URL(req.url);
-      const loginUrl = new URL("/", reqUrl.origin);
-      loginUrl.searchParams.set("loginRequired", "true");
-
-      return NextResponse.redirect(loginUrl);
-    }
+    if (!session || !session.user?.id)
+      return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
 
     const chatTitle = await suggestChatName(message);
 

@@ -135,7 +135,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="absolute inset-0 h-full w-full rounded-full bg-gray-100/30 dark:bg-neutral-800/30"
             />
           )}
           <span className="relative z-20">{item.name}</span>
@@ -234,10 +234,16 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm"
     >
-      <Image src="/zeltra-logo.png" alt="logo" width={30} height={30} />
-      <span className="font-medium ml-1 text-white">Zeltra AI</span>
+      <Image
+        src="/zeltra-logo.png"
+        alt="logo"
+        width={30}
+        height={30}
+        className="dark:invert-0 invert-100"
+      />
+      <span className="font-bold">Zeltra AI</span>
     </a>
   );
 };

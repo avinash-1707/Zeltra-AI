@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "./ui/button";
-import { Send } from "lucide-react";
+import { ArrowRight, Send } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import axios from "axios";
@@ -23,7 +23,6 @@ export default function NewMessageBox() {
   const handleSend = async () => {
     if (!message.trim()) return;
     const res = await axios.post("/api/auto-initiate", { message: message });
-    if (res.status == 401) router.push("/loginRequired=true");
     if (res.data?.sessionId) {
       setDraftMessage(message);
       router.push(`/chat/${res.data.sessionId}`);
@@ -78,6 +77,13 @@ export default function NewMessageBox() {
           }
         >
           Let's create a Website Builder
+        </Button>
+        <Button
+          className="rounded-full font-semibold text-sm group hover:scale-x-105 duration-300 dark:border-white/50 border-black/50 dark:hover:bg-white/70 hover:bg-black/80"
+          onClick={() => router.push("/chat")}
+        >
+          Go to your chat history{" "}
+          <ArrowRight className="group-hover:translate-x-1 transition-all duration-300" />
         </Button>
       </div>
     </div>
