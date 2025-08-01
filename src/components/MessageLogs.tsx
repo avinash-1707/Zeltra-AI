@@ -246,12 +246,11 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
                 />
               ))}
               {loading && (
-                <MessageContainer
-                  role="ai"
-                  name="Zeltra"
-                  avatarUrl="/ai-avatar.jpg"
-                  content="Thinking..."
-                />
+                <div className="px-4 py-2 my-8 flex flex-row gap-2">
+                  <div className="w-1 h-1 rounded-full bg-neutral-700 animate-bounce"></div>
+                  <div className="w-1 h-1 rounded-full bg-neutral-700 animate-bounce [animation-delay:-.3s]"></div>
+                  <div className="w-1 h-1 rounded-full bg-neutral-700 animate-bounce [animation-delay:-.5s]"></div>
+                </div>
               )}
             </>
           )}
