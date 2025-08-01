@@ -7,15 +7,18 @@ import { createNewChat } from "@/lib/services/chatServices";
 export async function POST(req: NextRequest) {
   try {
     const { message } = await req.json();
+    const url = new URL(req.url);
 
     if (!message)
       return NextResponse.json({ message: "You need to send a message" });
 
     const session = await getServerSession(authOptions);
     if (!session || !session.user?.id) {
-      return NextResponse.json({
-        message: "Please login to start talking to zeltra",
-      });
+      const reqUrl = new URL(req.url);
+      const loginUrl = new URL("/", reqUrl.origin);
+      loginUrl.searchParams.set("loginRequired", "true");
+
+      return NextResponse.redirect(loginUrl);
     }
 
     const chatTitle = await suggestChatName(message);

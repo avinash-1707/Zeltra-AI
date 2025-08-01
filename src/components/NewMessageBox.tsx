@@ -23,6 +23,7 @@ export default function NewMessageBox() {
   const handleSend = async () => {
     if (!message.trim()) return;
     const res = await axios.post("/api/auto-initiate", { message: message });
+    if (res.status == 401) router.push("/loginRequired=true");
     if (res.data?.sessionId) {
       setDraftMessage(message);
       router.push(`/chat/${res.data.sessionId}`);
@@ -31,7 +32,7 @@ export default function NewMessageBox() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="w-full h-24 flex gap-1 px-3 py-2 bg-neutral-900/20 dark:bg-neutral-200/20 rounded-2xl border border-neutral-400/50 dark:border-neutral-500/50 backdrop-blur-xl z-50">
         <Textarea
           placeholder="Type your startup idea ..."
@@ -55,7 +56,7 @@ export default function NewMessageBox() {
           </Button>
         </div>
       </div>
-      <div className="w-full mt-5 flex justify-center items-center gap-4">
+      <div className="w-full mt-5 flex flex-col md:flex-row justify-center items-center gap-4">
         <Button
           variant="outline"
           className="rounded-full font-semibold text-sm bg-transparent dark:border-white/50 border-black/50 hover:bg-black/10"

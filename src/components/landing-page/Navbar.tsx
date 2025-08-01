@@ -105,19 +105,22 @@ export function LandingNavbar({ searchParamsPromise }: Props) {
           <MobileNav>
             <MobileNavHeader>
               <NavbarLogo />
-              {session ? (
-                <Profile />
-              ) : (
-                <div className="flex items-center gap-4">
-                  <NavbarButton
-                    onClick={() => setOpen(true)}
-                    variant="primary"
-                    className="rounded-4xl"
-                  >
-                    Login
-                  </NavbarButton>
-                </div>
-              )}
+              <div className="flex gap-3">
+                <ModeToggle />
+                {session ? (
+                  <Profile />
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <NavbarButton
+                      onClick={() => setOpen(true)}
+                      variant="primary"
+                      className="rounded-4xl"
+                    >
+                      Login
+                    </NavbarButton>
+                  </div>
+                )}
+              </div>
             </MobileNavHeader>
           </MobileNav>
         </Navbar>
