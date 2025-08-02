@@ -12,12 +12,12 @@ export const HeroSection = () => {
   return (
     <section className="relative z-10 px-6 sm:px-8 md:px-12">
       <div className="max-w-7xl mx-auto min-h-screen flex flex-col items-center justify-center text-center py-12">
-        <Badge className="inline-flex items-center gap-2 text-sm rounded-full dark:bg-white/20 bg-black/20 cursor-default">
+        <Badge className="inline-flex items-center gap-2 text-xs md:text-sm rounded-full dark:bg-white/20 bg-black/20 cursor-default">
           <Brain aria-hidden="true" />
           <span>AI Powered Startup Intelligence</span>
         </Badge>
 
-        <h1 className="mt-5 font-bold leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="mt-5 font-bold leading-tight text-5xl sm:text-5xl md:text-6xl lg:text-7xl">
           Refine your{" "}
           <span className="bg-gradient-to-l from-[#377d71] via-[#fbc5c5] to-[#fba1a1] dark:from-[#1f4a43] dark:via-[#8b6b6b] dark:to-[#8b4d4d] bg-clip-text text-transparent">
             Startup Idea
