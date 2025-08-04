@@ -7,7 +7,6 @@ import { createNewChat } from "@/lib/services/chatServices";
 export async function POST(req: NextRequest) {
   try {
     const { message } = await req.json();
-    const url = new URL(req.url);
 
     if (!message)
       return NextResponse.json({ message: "You need to send a message" });

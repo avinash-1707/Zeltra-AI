@@ -22,12 +22,19 @@ export default function NewMessageBox() {
 
   const handleSend = async () => {
     if (!message.trim()) return;
-    const res = await axios.post("/api/auto-initiate", { message: message });
-    if (res.data?.sessionId) {
-      setDraftMessage(message);
-      router.push(`/chat/${res.data.sessionId}`);
+    try {
+      const res = await axios.post("/api/auto-initiate", { message: message });
+      if (res.data?.sessionId) {
+        setDraftMessage(message);
+        router.push(`/chat/${res.data.sessionId}`);
+      }
+      setMessage("");
+    } catch (error: any) {
+      if (error.response?.status) {
+        router.push("/?loginRequired=true");
+        return;
+      }
     }
-    setMessage("");
   };
 
   return (
