@@ -29,8 +29,8 @@ export const Footer = () => {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  About
+                <a href="/chat" className="hover:text-white transition-colors">
+                  Chat with Zeltra
                 </a>
               </li>
               <li>
@@ -41,22 +41,6 @@ export const Footer = () => {
                   How it Works
                 </a>
               </li>
-              <li>
-                <a
-                  href="#features"
-                  className="hover:text-white transition-colors"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#testimonials"
-                  className="hover:text-white transition-colors"
-                >
-                  Reviews
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -64,7 +48,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>
+              {/* <li>
                 <a href="#" className="hover:text-white transition-colors">
                   Privacy Policy
                 </a>
@@ -73,9 +57,12 @@ export const Footer = () => {
                 <a href="#" className="hover:text-white transition-colors">
                   Terms of Service
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="mailto:avinashnarwariya5@gmail.com"
+                  className="hover:text-white transition-colors"
+                >
                   Contact
                 </a>
               </li>

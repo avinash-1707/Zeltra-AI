@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useChatDraftStore } from "@/context/store";
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 
 interface ChatDraftStore {
   setDraftMessage: (message: string) => void;
@@ -62,7 +63,12 @@ export default function NewMessageBox() {
           </Button>
         </div>
       </div>
-      <div className="w-full mt-5 flex flex-col md:flex-row justify-center items-center gap-4">
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.5, delay: 1 }}
+        className="w-full mt-5 flex flex-col md:flex-row justify-center items-center gap-4"
+      >
         <Button
           variant="outline"
           className="rounded-full font-semibold text-sm bg-transparent dark:border-white/50 border-black/50 hover:bg-black/10"
@@ -92,7 +98,7 @@ export default function NewMessageBox() {
           Go to your chat history{" "}
           <ArrowRight className="group-hover:translate-x-1 transition-all duration-300" />
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 }
