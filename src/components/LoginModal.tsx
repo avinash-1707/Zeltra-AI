@@ -11,25 +11,23 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       initial={{ scale: 0.7, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.7, opacity: 0 }}
-      className="fixed inset-0 flex items-center justify-center bg-black/30 z-50 backdrop-blur"
+      className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur"
     >
-      <div className="bg-neutral-950/80 py-6 px-10 mx-3.5 rounded-2xl w-full h-1/3 lg:w-1/3 lg:h-1/2 relative flex flex-col items-center">
+      <div className="bg-neutral-300/90 dark:bg-neutral-950/90 py-6 px-10 mx-3.5 rounded-2xl w-full h-1/3 lg:w-1/3 lg:h-1/2 relative flex flex-col items-center">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 text-xl cursor-pointer"
+          className="absolute top-4 right-4 text-gray-500 text-xl cursor-pointer"
         >
-          <X className="text-white/20" />
+          <X className="text-black/20 dark:text-white/20" />
         </button>
-        <h2 className="text-md lg:text-2xl font-semibold mb-4 text-white">
-          Sign In to
-        </h2>
+        <h2 className="text-md lg:text-2xl font-semibold mb-4">Sign In to</h2>
         <h2 className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
           Zeltra AI
         </h2>
-        <div className=" mb-8 flex flex-col items-center justify-evenly w-full h-full">
+        <div className=" mb-8 flex flex-col gap-3 items-center justify-evenly w-full h-full">
           <Button
             onClick={() => signIn("google")}
-            className="w-full bg-blue-600 hover:bg-blue-800 text-white text-lg p-5 rounded-3xl mb-2 cursor-pointer"
+            className="w-full bg-blue-600 hover:bg-blue-800 text-white text-lg p-5 rounded-3xl cursor-pointer"
           >
             <span className="mr-2">
               <svg

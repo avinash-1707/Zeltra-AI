@@ -41,12 +41,8 @@ export const HowItWorks = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-100 to-white bg-clip-text text-transparent">
-              How It Works
-            </span>
-          </h2>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+          <p className="text-xl text-gray-800/70 dark:text-gray-500 max-w-2xl mx-auto">
             Transform your startup idea into a working prototype in three simple
             steps
           </p>
@@ -62,7 +58,7 @@ export const HowItWorks = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <Card className="h-full bg-black/40 backdrop-blur-sm border-black/20 shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 group">
+              <Card className="h-full bg-white/40 dark:bg-black/40 backdrop-blur-sm border-black/20 shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 group">
                 <CardContent className="p-8 text-center">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -72,7 +68,7 @@ export const HowItWorks = () => {
                     <step.icon className="w-8 h-8 text-white" />
                   </motion.div>
 
-                  <h3 className="text-xl font-bold mb-4 text-gray-400 group-hover:text-white transition-colors">
+                  <h3 className="text-xl font-bold mb-4 text-neutral-700 dark:text-gray-400 group-hover:text-black group-hover:dark:text-white transition-colors">
                     {step.title}
                   </h3>
 
