@@ -95,7 +95,7 @@ export default function NewMessageBox() {
           className="rounded-full font-semibold text-sm group hover:scale-x-105 duration-300 dark:border-white/50 border-black/50 dark:hover:bg-white/70 hover:bg-black/80"
           onClick={() => router.push("/chat")}
         >
-          Go to your chat history{" "}
+          Go to your chat{" "}
           <ArrowRight className="group-hover:translate-x-1 transition-all duration-300" />
         </Button>
       </motion.div>
