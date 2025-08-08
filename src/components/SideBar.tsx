@@ -104,7 +104,7 @@ export default function SideBar() {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="bg-neutral-900 shadow-lg text-white overflow-hidden"
+        className=" h-full bg-neutral-900 shadow-lg text-white overflow-hidden"
       >
         {/* Rest of the sidebar content remains the same */}
         <div className="p-4 flex justify-between items-center bg-neutral-900">
@@ -131,7 +131,7 @@ export default function SideBar() {
           {!isCollapsed && (
             <motion.button
               variants={childVariants}
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => router.push("/chat")}
               className="w-3/4 px-3 py-2 mt-6 text-white bg-blue-950 hover:bg-blue-800 rounded-3xl text-center"
             >
               + New Chat
@@ -145,7 +145,7 @@ export default function SideBar() {
         </motion.div>
         <motion.nav
           variants={parentVariants}
-          className="mt-6 flex flex-col h-fit flex-1 overflow-y-auto scrollbar-hide"
+          className="my-6 h-3/4 flex flex-col flex-1 overflow-y-auto custom-scrollbar"
         >
           {chatLogs.map((item, index) => (
             <motion.div

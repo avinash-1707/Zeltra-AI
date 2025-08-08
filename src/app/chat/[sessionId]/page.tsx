@@ -10,8 +10,6 @@ export default function Chat() {
   const sessionId = params.sessionId as string;
   return (
     <div className="flex h-screen">
-      <SideBar />
-
       <div className="flex-1 h-full flex flex-col items-center bg-neutral-950 text-white">
         <div className="w-full">
           <ChatNavbar />
