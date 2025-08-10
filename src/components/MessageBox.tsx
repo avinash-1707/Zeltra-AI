@@ -53,6 +53,7 @@ export default function MessageBox({ onSend, disabled }: ChatInputProps) {
           <SelectContent>
             <SelectGroup>
               <SelectItem value="gemini-2.0-flash">gemini-2.0-flash</SelectItem>
+              <SelectItem value="gemini-2.5-flash">gemini-2.5-flash</SelectItem>
               <SelectItem value="llama-3.3-70b-versatile">
                 llama-3.3-70b-versatile
               </SelectItem>

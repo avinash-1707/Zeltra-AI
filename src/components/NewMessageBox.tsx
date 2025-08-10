@@ -25,6 +25,7 @@ export default function NewMessageBox() {
     if (!message.trim()) return;
     try {
       const res = await axios.post("/api/auto-initiate", { message: message });
+      router.refresh();
       if (res.data?.sessionId) {
         setDraftMessage(message);
         router.push(`/chat/${res.data.sessionId}`);
