@@ -216,8 +216,8 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
     [sessionId]
   );
   return (
-    <div className="bg-neutral-950 flex flex-col h-screen">
-      <div className="messages-container h-[calc(100vh-160px)] overflow-y-auto scrollbar-hide">
+    <div className="bg-neutral-950 flex flex-col">
+      <div className="messages-container overflow-y-auto scrollbar-hide">
         <div className="max-w-4xl mx-auto px-4 space-y-4">
           {hasLoaded && messages.length === 0 ? (
             <motion.div
@@ -258,7 +258,7 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
         </div>
       </div>
 
-      <div className="flex justify-center w-full p-4 bg-neutral-950">
+      <div className="flex justify-center w-full bg-neutral-950">
         <MessageBox disabled={loading} onSend={handleSend} />
       </div>
     </div>

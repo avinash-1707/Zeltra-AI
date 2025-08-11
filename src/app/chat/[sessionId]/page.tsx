@@ -9,16 +9,9 @@ export default function Chat() {
   const params = useParams();
   const sessionId = params.sessionId as string;
   return (
-    <div className="flex h-screen">
-      <div className="flex-1 h-full flex flex-col items-center bg-neutral-950 text-white">
-        <div className="w-full">
-          <ChatNavbar />
-        </div>
-
-        <div className="fixed top-16 px-32 pb-12">
-          <MessageLogs sessionId={sessionId} />
-        </div>
-      </div>
+    <div className="h-screen flex flex-col overflow-auto">
+      <ChatNavbar />
+      <MessageLogs sessionId={sessionId} />
     </div>
   );
 }
