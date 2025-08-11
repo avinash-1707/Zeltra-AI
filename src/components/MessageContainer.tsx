@@ -63,30 +63,17 @@ export default function MessageContainer({
     <div
       className={`
         w-full flex items-end gap-3 my-2
-        ${role == "human" ? "justify-start" : "justify-end"}
+        ${role == "human" ? "justify-end" : "justify-start"}
       `}
     >
-      {/* Human avatar shown on left */}
-      {role === "human" && (
-        <div className="flex-shrink-0">
-          <Image
-            src={avatarUrl || "/default-avatar.png"}
-            alt="User Avatar"
-            height={32}
-            width={32}
-            className="w-8 h-8 rounded-full object-cover"
-          />
-        </div>
-      )}
-
       {/* Message bubble */}
       <div
         className={`
           text-md px-4 py-2 rounded-2xl
           ${
             role === "human"
-              ? "max-w-[600px] bg-blue-950/50 text-white rounded-bl-none self-start"
-              : "w-[1200px] my-8 bg-transparent text-white self-end"
+              ? "max-w-[600px] bg-blue-950/50 text-white self-start"
+              : "max-w-[1200px] my-8 bg-transparent text-white self-end"
           }
         `}
       >

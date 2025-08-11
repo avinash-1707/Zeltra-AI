@@ -217,8 +217,8 @@ export default function MessageLogs({ sessionId }: { sessionId: string }) {
   );
   return (
     <div className="bg-neutral-950 flex flex-col">
-      <div className="messages-container overflow-y-auto scrollbar-hide">
-        <div className="max-w-4xl mx-auto px-4 space-y-4">
+      <div className="mb-24 messages-container overflow-y-auto scrollbar-hide">
+        <div className="max-w-4xl mx-auto px-4 space-y-5">
           {hasLoaded && messages.length === 0 ? (
             <motion.div
               initial={{ y: 30, opacity: 0 }}
