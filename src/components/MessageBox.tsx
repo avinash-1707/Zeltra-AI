@@ -32,7 +32,7 @@ export default function MessageBox({ onSend, disabled }: ChatInputProps) {
   };
 
   return (
-    <div className="w-4xl h-27 bottom-0 fixed flex flex-col gap-1 px-2 py-4 justify-center bg-gray-900 rounded-t-2xl">
+    <div className="w-4xl h-27 bottom-6.5 fixed flex flex-col gap-1 px-2 py-4 justify-center bg-gray-900 rounded-2xl">
       <Textarea
         placeholder="Analyze your startup idea ..."
         className="w-full border-none text-white/70 resize-none"
