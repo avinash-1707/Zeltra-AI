@@ -12,6 +12,7 @@ import { z } from "zod";
 import { motion } from "motion/react";
 import NewChatNavbar from "@/components/NewChatNavbar";
 import NewMessageBox from "@/components/NewMessageBox";
+import ChatWrapper from "@/components/ChatWrapper";
 
 const parentVariants = {
   initial: {},
@@ -84,9 +85,11 @@ export default function ChatHome() {
     );
 
   return (
-    <div className="w-full h-full flex flex-col gap-12 justify-center items-center">
-      <h1 className="text-4xl font-semibold">What're you upto today?</h1>
-      <NewMessageBox />
-    </div>
+    <ChatWrapper>
+      <div className="w-full h-full flex flex-col gap-12 justify-center items-center">
+        <h1 className="text-4xl font-bold">What're you upto today?</h1>
+        <NewMessageBox />
+      </div>
+    </ChatWrapper>
   );
 }
