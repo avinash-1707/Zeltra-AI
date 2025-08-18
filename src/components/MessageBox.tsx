@@ -32,7 +32,7 @@ export default function MessageBox({ onSend, disabled }: ChatInputProps) {
   };
 
   return (
-    <div className="w-4xl h-27 bottom-6.5 fixed flex flex-col gap-1 px-2 py-4 justify-center bg-gray-900 rounded-2xl">
+    <div className="w-4xl h-27 bottom-6.5 fixed flex flex-col gap-1 px-2 py-4 justify-center bg-neutral-300 dark:bg-neutral-900 rounded-2xl">
       <Textarea
         placeholder="Analyze your startup idea ..."
         className="w-full border-none text-white/70 resize-none"
@@ -65,7 +65,7 @@ export default function MessageBox({ onSend, disabled }: ChatInputProps) {
         </Select>
         <Button
           disabled={disabled}
-          className={`mt-6 m-0.5 bg-neutral-300/90 hover:bg-neutral-300/70 cursor-pointer text-black ${
+          className={`mt-6 m-0.5 bg-black/90 hover:bg-black/70 dark:bg-neutral-300/90 dark:hover:bg-neutral-300/70 cursor-pointer text-white dark:text-black ${
             disabled ? "animate-pulse duration-300" : ""
           }`}
           onClick={handleSend}
