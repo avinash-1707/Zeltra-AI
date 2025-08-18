@@ -1,6 +1,5 @@
 "use client";
 
-import NewChatModal from "@/components/NewChatModal";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChatSessionSchema } from "@/schemas/chatSessionSchema";
@@ -9,8 +8,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { motion } from "motion/react";
-import NewChatNavbar from "@/components/NewChatNavbar";
 import NewMessageBox from "@/components/NewMessageBox";
 import ChatWrapper from "@/components/ChatWrapper";
 

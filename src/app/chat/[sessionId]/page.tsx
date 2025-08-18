@@ -1,9 +1,7 @@
 "use client";
 
-import ChatNavbar from "@/components/ChatNavbar";
 import ChatWrapper from "@/components/ChatWrapper";
 import MessageLogs from "@/components/MessageLogs";
-import SideBar from "@/components/SideBar";
 import { useParams } from "next/navigation";
 
 export default function Chat() {

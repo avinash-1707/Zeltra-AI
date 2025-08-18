@@ -1,9 +1,6 @@
 import { motion } from "motion/react";
 import React from "react";
 import Profile from "./Profile";
-import Image from "next/image";
-import Link from "next/link";
-
 export default function ChatNavbar() {
   return (
     <motion.div
