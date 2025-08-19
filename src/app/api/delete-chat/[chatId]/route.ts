@@ -1,9 +1,12 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function DELETE({ params }: { params: any }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ chatId: string }> }
+) {
   const { chatId } = await params;
   if (!chatId)
     return NextResponse.json(
