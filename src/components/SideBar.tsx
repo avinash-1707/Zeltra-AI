@@ -6,9 +6,20 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { motion } from "motion/react";
-import { Menu, PanelRightOpen } from "lucide-react";
+import { Menu, PanelRightOpen, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const sidebarVariants = {
   closed: {
@@ -63,17 +74,14 @@ export default function SideBar() {
     []
   );
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const handleNewChat = async (title: string) => {
-    try {
-      const res = await axios.post("/api/new-chat", { title });
-      const { sessionId } = res.data;
-      router.push(`/chat/${sessionId}`);
-    } catch (err) {
-      console.error("Failed to create new chat session", err);
+  const handleChatDelete = async (chatId: string) => {
+    const res = await axios.delete(`/api/delete-chat/${chatId}`);
+    if (res.data.message) {
+      console.log(res.data.message);
     }
+    router.push("/chat");
   };
 
   const toggleSidebar = () => {
@@ -146,11 +154,37 @@ export default function SideBar() {
               variants={childVariants}
               key={index}
               onClick={() => router.push(`/chat/${item.id}`)}
-              className={`px-4 py-3 flex items-center hover:bg-gray-300 dark:hover:bg-gray-700 bg-transparent cursor-pointer rounded-2xl text-black/80 dark:text-white/80 ${
+              className={`relative px-4 py-3 flex items-center hover:bg-gray-300 group dark:hover:bg-gray-700 bg-transparent cursor-pointer duration-300 rounded-2xl text-black/80 dark:text-white/80 ${
                 isCollapsed ? "justify-center" : ""
               }`}
             >
               {!isCollapsed && <span className="ml-3">{item.title}</span>}
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <button className="absolute p-2 hover:bg-white/10 rounded-2xl opacity-0 group-hover:opacity-90 right-0 border-none z-50">
+                    <Trash className="size-4" />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      your account and remove your data from our servers.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => handleChatDelete(item.id as string)}
+                    >
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </motion.div>
           ))}
         </motion.nav>

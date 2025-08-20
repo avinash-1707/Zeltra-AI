@@ -31,11 +31,11 @@ export async function DELETE(
     const deletedSession = await prisma.chatSession.delete({
       where: { id: chatId },
     });
+
     if (deletedSession) {
-      return NextResponse.json(
-        { message: "Chat session deleted successfully" },
-        { status: 204 }
-      );
+      return NextResponse.json({
+        message: "Chat session deleted successfully",
+      });
     }
 
     return NextResponse.json({ message: "Failed to delete Chat session" });
