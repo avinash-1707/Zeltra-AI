@@ -154,14 +154,14 @@ export default function SideBar() {
               variants={childVariants}
               key={index}
               onClick={() => router.push(`/chat/${item.id}`)}
-              className={`relative px-4 py-3 flex items-center hover:bg-gray-300 group dark:hover:bg-gray-700 bg-transparent cursor-pointer duration-300 rounded-2xl text-black/80 dark:text-white/80 ${
+              className={`relative px-4 py-3 flex items-center hover:bg-gray-300 group dark:hover:bg-gray-700 bg-transparent duration-300 rounded-2xl text-black/80 dark:text-white/80 ${
                 isCollapsed ? "justify-center" : ""
               }`}
             >
               {!isCollapsed && <span className="ml-3">{item.title}</span>}
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <button className="absolute p-2 hover:bg-white/10 rounded-2xl opacity-0 group-hover:opacity-90 right-0 border-none z-50">
+                  <button className="absolute p-2 hover:bg-white/10 rounded-2xl opacity-0 group-hover:opacity-90 right-0 border-none z-50 cursor-pointer">
                     <Trash className="size-4" />
                   </button>
                 </AlertDialogTrigger>
@@ -171,8 +171,7 @@ export default function SideBar() {
                       Are you absolutely sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      your account and remove your data from our servers.
+                      Do you want to delete the chat history '{item.title}'?
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
